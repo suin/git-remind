@@ -26,4 +26,13 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
-
+brew:
+  name: git-remind
+  github:
+    owner: suin
+    name: homebrew-suin
+  folder: Formula
+  homepage: "https://github.com/suin/git-remind/"
+  description: "Never forget to git commit and push."
+  dependencies:
+  - git
