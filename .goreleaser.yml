@@ -5,6 +5,10 @@ before:
 builds:
 - env:
   - CGO_ENABLED=0
+- ldflags:
+  - -X "github.com/suin/git-remind/app/cli.Name=git-remind"
+    -X "github.com/suin/git-remind/app/cli.Description=Never forget to git commit and push"
+    -X "github.com/suin/git-remind/app/cli.Version={{.Version}}"
 archive:
   replacements:
     darwin: Darwin
