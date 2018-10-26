@@ -22,4 +22,4 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
-    
+
