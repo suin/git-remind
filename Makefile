@@ -22,6 +22,9 @@ build: fmt
 install: build
 	cp bin/$(APP_NAME) /usr/local/bin/$(APP_NAME)
 
+release:
+	envchain goreleaser goreleaser release --rm-dist
+
 demo: demo-prepare demo-exec
 
 demo-prepare:
