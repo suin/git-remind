@@ -7,3 +7,18 @@ func NewGetPathPatterns(pathPatterns GetPathPatterns) GetPathPatterns {
 		return pathPatterns()
 	}
 }
+
+func MultipleGetPathPatterns(multipleGetPathPatterns ...GetPathPatterns) GetPathPatterns {
+	return func() ([]string, error) {
+		for _, getPathPatterns := range multipleGetPathPatterns {
+			pathPatterns, err := getPathPatterns()
+			if err != nil {
+				return []string{}, err
+			}
+			if len(pathPatterns) > 0 {
+				return pathPatterns, nil
+			}
+		}
+		return []string{}, nil
+	}
+}

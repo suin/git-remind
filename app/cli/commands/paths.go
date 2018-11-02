@@ -12,7 +12,7 @@ var PathsCommand = cli.Command{
 	Action: pathsAction,
 }
 
-func pathsAction(*cli.Context) error {
+func pathsAction(c *cli.Context) error {
 	pathPatterns, err := appservice.GetPathPatterns()
 	if err != nil {
 		return err

@@ -85,6 +85,42 @@ Up-to-date: /Users/suin/projects/myapp3
 git-remind status-notification
 ```
 
+### Ad-hoc paths configuration
+
+The paths can be specified with `--path` option instead of git global configuration `remind.paths`.
+
+```
+$ git-remind --path '/path/to/dir/*' paths
+/path/to/dir/*
+```
+
+The option accepts multiple paths giving two or more `--path` options.
+
+```
+$ git-remind --path '/path/to/dir1/*' --path '/path/to/dir2/*' paths
+/path/to/dir1/*
+/path/to/dir2/*
+```
+
+Also giving the environment variable `GIT_REMIND_PATHS`, it makes the same effect.
+
+```
+$ export GIT_REMIND_PATHS='/path/to/dir1/*,/path/to/dir2/*'
+$ git-remind paths
+/path/to/dir1/*
+/path/to/dir2/*
+```
+
+When both of `--path` option and `GIT_REMIND_PATHS` are given, the paths become the combination of the both.
+
+```
+$ export GIT_REMIND_PATHS='/path/to/dir1/*,/path/to/dir2/*'
+$ git-remind --path '/path/to/dir3/*' paths
+/path/to/dir1/*
+/path/to/dir2/*
+/path/to/dir3/*
+```
+
 ## Advanced usage
 
 ### Scheduled reminder (cron)
