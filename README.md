@@ -46,8 +46,9 @@ If you have some git repositories (e.g. `~/projects/foo` and `~/projects/bar`) i
 ```
 
 You can also utilise the `git config` command to configure git-remind to avoid the manually editing of the `.gitconfig`.
+
 ```bash
-git config --global remind.paths /Users/you/projects/*
+git config --global remind.paths '/Users/you/projects/*'
 ```
 
 Check the configuration using following command:
