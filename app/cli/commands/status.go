@@ -39,16 +39,8 @@ func statusAction(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	var color cliutil.StatusColor = &cliutil.StatusColorEnabled{}
-	if c.Bool("no-ansi") || !terminal.IsTerminal(int(os.Stdout.Fd())) {
-		color = &cliutil.StatusColorDisabled{}
-	}
-	printStatus := printLongStatus
-	if c.Bool("no-status") {
-		printStatus = printOnlyPaths
-	} else if c.Bool("short") {
-		printStatus = printShortStatus
-	}
+	color := getStatusColor(c)
+	printStatus := getPrintStatus(c)
 	for _, repoStatus := range repoStatuses {
 		if !c.Bool("all") && repoStatus.GetGitStatus() == domain.UpToDate {
 			continue
@@ -56,6 +48,22 @@ func statusAction(c *cli.Context) error {
 		printStatus(repoStatus, color)
 	}
 	return nil
+}
+
+func getPrintStatus(c *cli.Context) func(domain.RepoStatus, cliutil.StatusColor) {
+	if c.Bool("no-status") {
+		return printOnlyPaths
+	} else if c.Bool("short") {
+		return printShortStatus
+	}
+	return printLongStatus
+}
+
+func getStatusColor(c *cli.Context) cliutil.StatusColor {
+	if c.Bool("no-ansi") || !terminal.IsTerminal(int(os.Stdout.Fd())) {
+		return &cliutil.StatusColorDisabled{}
+	}
+	return &cliutil.StatusColorEnabled{}
 }
 
 func printLongStatus(repoStatus domain.RepoStatus, color cliutil.StatusColor) {
