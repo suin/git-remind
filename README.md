@@ -30,19 +30,25 @@ Download build binary from the [releases](https://github.com/suin/git-remind/rel
 
 ## Configuration
 
-Add `remind.paths` to your `.gitconfig`, using your own absolute path to the repository directories. 
+Add `remind.paths` to your `.gitconfig`, using your own absolute path to the repository directories.
 
 ```text:.gitconfig
 [remind]
 	paths = /Users/you/projects/foo,/Users/you/projects/bar
 ```
 
-If you have some git repositories (e.g. `~/projects/foo` and `~/projects/bar`) in the same directory (e.g. in `~/projects`) , you may specify the path using wildcard (e.g.`/Users/you/projects/*`):
-
+If you have some git repositories (e.g. `~/projects/foo` and `~/projects/bar`) in the same directory (e.g. in `~/projects`) , you may specify the path using wildcard (e.g. `/Users/you/projects/*`):
 
 ```text:.gitconfig
 [remind]
 	paths = /Users/you/projects/*
+```
+
+If you have a nested git repository structure (e.g. `~/projects/foobar/foo`, `~/projects/foobar/bar` and `~/projects/foo`), you may specify the path using a double asterisk (e.g. `/Users/you/projects/**`):
+
+```text:.gitconfig
+[remind]
+    paths = /Users/you/projects/**
 ```
 
 You can also utilise the `git config` command to configure git-remind to avoid the manually editing of the `.gitconfig`.
@@ -76,7 +82,7 @@ C  /Users/suin/projects/myapp1
 CP /Users/suin/projects/myapp2
 ```
 
-#### Show all status including up-to-date repositories 
+#### Show all status including up-to-date repositories
 
 ```
 $ git-remind status -a
